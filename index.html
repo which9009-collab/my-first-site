@@ -393,6 +393,45 @@
       100% { transform: scaleY(1); }
     }
 
+    /* ---------- 留言板 ---------- */
+    .gb-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 40px; align-items: start; }
+    .gb-form {
+      background: var(--card); border-radius: var(--radius); padding: 36px 32px;
+      border: 1px solid var(--line); box-shadow: var(--shadow-sm);
+    }
+    .field { margin-bottom: 22px; }
+    .field label { display: block; font-weight: 700; margin-bottom: 8px; }
+    .field input, .field textarea {
+      width: 100%; font: inherit; font-size: 17px; line-height: 1.6; color: var(--ink);
+      background: var(--cream); border: 2px solid #C9A992; border-radius: 16px;
+      padding: 12px 16px; transition: border-color .2s ease;
+    }
+    .field textarea { resize: vertical; min-height: 110px; }
+    .field input:hover, .field textarea:hover { border-color: var(--muted); }
+    .field input:focus-visible, .field textarea:focus-visible { border-color: var(--plum); border-radius: 16px; }
+    .field [aria-invalid="true"] { border-color: #B3261E; }
+    .hint { margin: 6px 0 0; font-size: 14px; color: var(--muted); }
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .gb-form .btn { border: 0; cursor: pointer; font-family: inherit; }
+    .gb-form .btn:disabled { opacity: .6; cursor: progress; transform: none; }
+    .gb-status { margin: 16px 0 0; min-height: 1.85em; font-weight: 700; }
+    .gb-status.is-error { color: #B3261E; }
+    .gb-status.is-ok { color: #2E6B3A; }
+    .gb-board h3 { font-family: var(--f-zh-title); font-weight: 900; font-size: 22px; margin-bottom: 18px; }
+    .gb-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; max-height: 560px; overflow-y: auto; padding-right: 4px; }
+    .gb-entry {
+      background: var(--card); border: 1px solid var(--line); border-radius: 22px;
+      padding: 18px 22px; box-shadow: var(--shadow-sm);
+    }
+    .gb-entry-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; margin-bottom: 4px; }
+    .gb-entry-name { font-weight: 700; color: var(--rust); }
+    .gb-entry time { font-size: 13px; color: var(--muted); }
+    .gb-entry p { margin: 0; overflow-wrap: anywhere; }
+    .gb-empty { color: var(--muted); }
+    .gb-notice {
+      background: var(--sand); border-radius: var(--radius); padding: 28px 32px; font-weight: 500;
+    }
+
     /* ---------- 聯絡我 ---------- */
     .contact { text-align: center; }
     .contact .section-lead { margin-bottom: 32px; }
@@ -438,6 +477,7 @@
       .roles-grid,
       .expertise-grid,
       .journey-grid,
+      .gb-grid,
       .strengths-grid,
       .concert,
       .links-grid { grid-template-columns: 1fr; }
@@ -495,6 +535,7 @@
           <li><a href="#expertise">專業</a></li>
           <li><a href="#journey">經歷</a></li>
           <li><a href="#concert">下班後</a></li>
+          <li><a href="#guestbook">留言板</a></li>
           <li class="nav-cta"><a href="#contact">聯絡我</a></li>
         </ul>
       </nav>
@@ -777,6 +818,46 @@
       </div>
     </section>
 
+    <!-- 留言板 -->
+    <section id="guestbook" class="section" aria-labelledby="guestbook-title" style="padding-top: 0;">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow" lang="en">Guestbook</p>
+          <h2 class="section-title" id="guestbook-title">訪客留言板</h2>
+          <p class="section-lead">路過留個言吧！寫下你的名字和一句話，讓我知道你來過。</p>
+        </div>
+
+        <p class="gb-notice" id="gb-notice" hidden></p>
+
+        <div class="gb-grid" id="gb-app">
+          <form class="gb-form reveal" id="gb-form" novalidate>
+            <div class="field">
+              <label for="gb-name">名字</label>
+              <input id="gb-name" name="name" type="text" maxlength="30" required autocomplete="nickname" aria-describedby="gb-name-hint">
+              <p class="hint" id="gb-name-hint">最多 30 個字</p>
+            </div>
+            <div class="field">
+              <label for="gb-message">想說的話</label>
+              <textarea id="gb-message" name="message" rows="3" maxlength="140" required aria-describedby="gb-message-count"></textarea>
+              <p class="hint" id="gb-message-count">還可以輸入 140 個字</p>
+            </div>
+            <div class="hp" aria-hidden="true">
+              <label for="gb-website">網站（請留空）</label>
+              <input id="gb-website" name="website" type="text" tabindex="-1" autocomplete="off">
+            </div>
+            <button class="btn btn-primary" type="submit" id="gb-submit">送出留言</button>
+            <p class="gb-status" id="gb-status" role="status" aria-live="polite"></p>
+          </form>
+
+          <div class="gb-board reveal">
+            <h3 id="gb-list-title">大家的留言</h3>
+            <p class="gb-empty" id="gb-empty">留言載入中…</p>
+            <ol class="gb-list" id="gb-list" aria-labelledby="gb-list-title" tabindex="0"></ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- 8. 聯絡我 -->
     <section id="contact" class="section contact" aria-labelledby="contact-title" style="padding-top: 0;">
       <div class="container">
@@ -821,6 +902,154 @@
         });
       }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
       items.forEach(function (el) { io.observe(el); });
+    })();
+
+    // ---------- 訪客留言板 ----------
+    (function () {
+      // 正式網址（Vercel）。GitHub Pages 沒有後端，留言板只在正式網址運作。
+      var OFFICIAL_URL = '';
+      var API = '/api/guestbook';
+      var MESSAGE_MAX = 140;
+
+      var app = document.getElementById('gb-app');
+      var notice = document.getElementById('gb-notice');
+      var form = document.getElementById('gb-form');
+      var nameInput = document.getElementById('gb-name');
+      var messageInput = document.getElementById('gb-message');
+      var websiteInput = document.getElementById('gb-website');
+      var submitBtn = document.getElementById('gb-submit');
+      var statusEl = document.getElementById('gb-status');
+      var list = document.getElementById('gb-list');
+      var empty = document.getElementById('gb-empty');
+      var counter = document.getElementById('gb-message-count');
+
+      if (location.hostname.endsWith('github.io')) {
+        app.hidden = true;
+        notice.hidden = false;
+        if (OFFICIAL_URL) {
+          notice.textContent = '留言板只在正式網站開放，歡迎到這裡留言：';
+          var link = document.createElement('a');
+          link.href = OFFICIAL_URL + '#guestbook';
+          link.textContent = OFFICIAL_URL.replace(/^https?:\/\//, '');
+          notice.appendChild(link);
+        } else {
+          notice.textContent = '留言板只在正式網站開放，敬請期待！';
+        }
+        return;
+      }
+
+      var timeFormat = new Intl.DateTimeFormat('zh-TW', {
+        year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+      });
+
+      function renderEntry(entry) {
+        var li = document.createElement('li');
+        li.className = 'gb-entry';
+        var head = document.createElement('div');
+        head.className = 'gb-entry-head';
+        var name = document.createElement('span');
+        name.className = 'gb-entry-name';
+        name.textContent = entry.name;
+        var time = document.createElement('time');
+        var date = new Date(entry.created_at);
+        time.dateTime = date.toISOString();
+        time.textContent = timeFormat.format(date);
+        head.append(name, time);
+        var msg = document.createElement('p');
+        msg.textContent = entry.message;
+        li.append(head, msg);
+        return li;
+      }
+
+      function showEmpty(text) {
+        empty.textContent = text;
+        empty.hidden = !text;
+      }
+
+      function setStatus(text, kind) {
+        statusEl.textContent = text;
+        statusEl.className = 'gb-status' + (kind ? ' is-' + kind : '');
+      }
+
+      function updateCounter() {
+        var left = MESSAGE_MAX - messageInput.value.length;
+        counter.textContent = '還可以輸入 ' + Math.max(left, 0) + ' 個字';
+      }
+
+      function markInvalid(input, invalid) {
+        if (invalid) input.setAttribute('aria-invalid', 'true');
+        else input.removeAttribute('aria-invalid');
+      }
+
+      function load() {
+        fetch(API, { headers: { Accept: 'application/json' } })
+          .then(function (res) {
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return res.json();
+          })
+          .then(function (data) {
+            list.replaceChildren.apply(list, data.entries.map(renderEntry));
+            showEmpty(data.entries.length ? '' : '還沒有留言，來當第一個吧！');
+          })
+          .catch(function () {
+            showEmpty('留言暫時載不出來，請稍後重新整理看看。');
+          });
+      }
+
+      messageInput.addEventListener('input', updateCounter);
+      [nameInput, messageInput].forEach(function (input) {
+        input.addEventListener('input', function () { markInvalid(input, false); });
+      });
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        var name = nameInput.value.trim();
+        var message = messageInput.value.trim();
+        markInvalid(nameInput, !name);
+        markInvalid(messageInput, !message);
+        if (!name) { setStatus('請輸入你的名字。', 'error'); nameInput.focus(); return; }
+        if (!message) { setStatus('請寫下想說的話。', 'error'); messageInput.focus(); return; }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = '送出中…';
+        setStatus('');
+
+        fetch(API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ name: name, message: message, website: websiteInput.value })
+        })
+          .then(function (res) {
+            return res.json().catch(function () { return {}; }).then(function (data) {
+              if (!res.ok) {
+                var err = new Error(data.error || '送出失敗，請稍後再試。');
+                err.field = data.field;
+                throw err;
+              }
+              return data;
+            });
+          })
+          .then(function (data) {
+            list.prepend(renderEntry(data.entry));
+            showEmpty('');
+            form.reset();
+            updateCounter();
+            setStatus('謝謝你的留言！', 'ok');
+          })
+          .catch(function (err) {
+            var input = err.field === 'name' ? nameInput : err.field === 'message' ? messageInput : null;
+            if (input) { markInvalid(input, true); input.focus(); }
+            // fetch 本身失敗（斷線）時會丟 TypeError
+            setStatus(err instanceof TypeError ? '連線失敗，請檢查網路後再試一次。' : err.message, 'error');
+          })
+          .finally(function () {
+            submitBtn.disabled = false;
+            submitBtn.textContent = '送出留言';
+          });
+      });
+
+      updateCounter();
+      load();
     })();
   </script>
 </body>
