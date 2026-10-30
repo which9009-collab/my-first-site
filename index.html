@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>劉亦中 Yvette｜無障礙永續顧問</title>
+  <meta name="description" content="劉亦中 Yvette，無障礙永續顧問。投入無障礙交通與旅遊 12 年以上，協助企業把無障礙與永續做進日常。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,800&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@900&display=swap" rel="stylesheet">
+  <script>document.documentElement.classList.add('js');</script>
+  <style>
+    :root {
+      --cream: #FFF6EC;
+      --sand: #F6E3CC;
+      --peach: #F7B58B;
+      --coral: #E8704F;
+      --terracotta: #B9472B;
+      --amber: #F2A93B;
+      --plum: #3A1F26;
+      --ink: #2B1A1C;
+      --muted: #6E5048;
+      --card: #FFFFFF;
+      /* 小字用的深赤陶，在 sand 底上也能達到 4.5:1 */
+      --rust: #9A3A22;
+      --line: #EBD3BC;
+      --radius-lg: 40px;
+      --radius: 28px;
+      --shadow: 0 24px 48px -28px rgba(58, 31, 38, .45);
+      --shadow-sm: 0 10px 24px -16px rgba(58, 31, 38, .4);
+      --f-en: "Fraunces", Georgia, serif;
+      --f-zh-title: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+      --f-body: "Noto Sans TC", system-ui, -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    @media (prefers-reduced-motion: no-preference) {
+      html { scroll-behavior: smooth; }
+    }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--f-body);
+      font-size: 17px;
+      line-height: 1.85;
+      overflow-x: clip;
+      -webkit-font-smoothing: antialiased;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: var(--rust); text-underline-offset: 3px; }
+    p { margin: 0 0 1em; }
+    h1, h2, h3 { margin: 0; line-height: 1.3; }
+
+    :focus-visible {
+      outline: 3px solid var(--plum);
+      outline-offset: 3px;
+      box-shadow: 0 0 0 6px var(--amber);
+      border-radius: 8px;
+    }
+    .concert :focus-visible { outline-color: var(--amber); box-shadow: 0 0 0 6px var(--plum); }
+
+    .visually-hidden {
+      position: absolute !important; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+    }
+    .skip-link {
+      position: absolute; left: 16px; top: -80px; z-index: 100;
+      background: var(--plum); color: var(--cream);
+      padding: 12px 20px; border-radius: 999px;
+      font-weight: 700; text-decoration: none;
+    }
+    .skip-link:focus { top: 12px; }
+
+    .container { width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+    section { scroll-margin-top: 84px; }
+    .section { padding: 112px 0; }
+
+    /* ---------- 共用標題 ---------- */
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--f-en); font-weight: 800;
+      font-size: 15px; letter-spacing: .08em;
+      color: var(--rust); margin-bottom: 14px;
+    }
+    .eyebrow::before {
+      content: ""; width: 28px; height: 3px; border-radius: 3px;
+      background: linear-gradient(90deg, var(--terracotta), var(--amber));
+    }
+    .section-title {
+      font-family: var(--f-zh-title); font-weight: 900;
+      font-size: clamp(30px, 4.2vw, 46px);
+      letter-spacing: .02em; color: var(--ink);
+    }
+    .section-lead { color: var(--muted); font-size: 18px; max-width: 40em; margin-top: 16px; }
+    .section-head { margin-bottom: 52px; }
+    .section-head.center { text-align: center; }
+    .section-head.center .section-lead { margin-left: auto; margin-right: auto; }
+
+    /* ---------- 按鈕 ---------- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 52px; padding: 12px 28px; border-radius: 999px;
+      font-weight: 700; font-size: 17px; text-decoration: none;
+      transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease;
+    }
+    .btn-primary { background: var(--plum); color: var(--cream); box-shadow: var(--shadow-sm); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow); background: #4A2831; }
+    .btn-outline { border: 2px solid var(--plum); color: var(--plum); background: transparent; }
+    .btn-outline:hover { background: var(--plum); color: var(--cream); }
+
+    /* ---------- 導覽列 ---------- */
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255, 246, 236, .72);
+      -webkit-backdrop-filter: saturate(160%) blur(14px);
+      backdrop-filter: saturate(160%) blur(14px);
+      border-bottom: 1px solid rgba(185, 71, 43, .12);
+    }
+    .site-header .container {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px; gap: 16px;
+    }
+    .logo {
+      font-family: var(--f-en); font-weight: 800; font-size: 26px;
+      color: var(--ink); text-decoration: none; letter-spacing: -.01em;
+    }
+    .logo .dot { color: var(--coral); }
+    .nav-list { display: flex; align-items: center; gap: 4px; list-style: none; margin: 0; padding: 0; }
+    .nav-list a {
+      display: block; padding: 8px 14px; border-radius: 999px;
+      color: var(--ink); text-decoration: none; font-weight: 500; font-size: 15px;
+      transition: background-color .2s ease;
+    }
+    .nav-list a:hover { background: var(--sand); }
+    .nav-list .nav-cta a { background: var(--plum); color: var(--cream); padding: 8px 18px; margin-left: 6px; }
+    .nav-list .nav-cta a:hover { background: #4A2831; }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; overflow: clip; padding: 72px 0 112px; }
+    .glow { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .55; pointer-events: none; }
+    .glow-peach { width: 520px; height: 520px; background: var(--peach); top: -160px; right: -80px; }
+    .glow-amber { width: 420px; height: 420px; background: var(--amber); bottom: -140px; left: -140px; opacity: .35; }
+    .hero-grid {
+      position: relative; display: grid;
+      grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: center;
+    }
+    .pill {
+      display: inline-block; padding: 8px 18px; border-radius: 999px;
+      background: var(--card); color: var(--rust); font-weight: 700; font-size: 15px;
+      box-shadow: var(--shadow-sm); border: 1px solid var(--line);
+    }
+    .hero h1 { margin: 22px 0 8px; }
+    .hero-name {
+      display: block; font-family: var(--f-en); font-weight: 800;
+      font-size: clamp(76px, 12vw, 148px); line-height: .95; letter-spacing: -.035em;
+      color: var(--ink);
+    }
+    .hero-name .dot { color: var(--coral); }
+    .hero-zh {
+      display: block; margin-top: 14px;
+      font-family: var(--f-body); font-weight: 500; font-size: 18px;
+      letter-spacing: .6em; color: var(--muted);
+    }
+    .hero-role {
+      font-family: var(--f-zh-title); font-weight: 900;
+      font-size: clamp(30px, 4vw, 42px); margin: 18px 0 18px;
+      background: linear-gradient(90deg, var(--terracotta), var(--coral) 55%, var(--amber));
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: var(--terracotta);
+      width: fit-content;
+    }
+    .hero-intro { font-size: 18px; color: var(--muted); max-width: 34em; }
+    .stats {
+      list-style: none; padding: 0; margin: 32px 0 36px;
+      display: grid; grid-template-columns: repeat(3, auto); gap: 14px 40px; justify-content: start;
+    }
+    .stats li { display: flex; flex-direction: column; line-height: 1.4; }
+    .stats strong {
+      font-family: var(--f-en); font-weight: 800; font-size: 40px; line-height: 1.1;
+      color: var(--terracotta);
+    }
+    .stats span { color: var(--muted); font-size: 15px; margin-top: 4px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+    .hero-visual { position: relative; display: flex; justify-content: center; padding: 24px 0; }
+    .arch {
+      position: relative; width: min(360px, 100%); aspect-ratio: 4 / 5;
+      border-radius: 999px 999px 36px 36px; overflow: hidden;
+      background: linear-gradient(165deg, var(--peach) 0%, var(--coral) 58%, var(--terracotta) 100%);
+      box-shadow: 0 40px 70px -36px rgba(185, 71, 43, .7);
+      display: grid; place-items: center;
+    }
+    .arch::before {
+      content: ""; position: absolute; width: 62%; aspect-ratio: 1; border-radius: 50%;
+      background: radial-gradient(circle, rgba(242, 169, 59, .95), rgba(242, 169, 59, 0) 70%);
+      top: 10%; left: 50%; transform: translateX(-50%);
+    }
+    .arch::after {
+      content: ""; position: absolute; left: -10%; right: -10%; bottom: -18%; height: 46%;
+      border-radius: 50%; background: rgba(58, 31, 38, .22);
+    }
+    .arch-letter {
+      position: relative; z-index: 1;
+      font-family: var(--f-en); font-weight: 800; font-size: clamp(140px, 18vw, 200px);
+      line-height: 1; color: var(--cream);
+      text-shadow: 0 12px 30px rgba(58, 31, 38, .35);
+    }
+    .sticker {
+      position: absolute; z-index: 2;
+      background: var(--card); color: var(--ink);
+      padding: 10px 16px; border-radius: 999px; font-weight: 700; font-size: 15px;
+      white-space: nowrap; box-shadow: var(--shadow); border: 1px solid var(--line);
+      animation: float 6s ease-in-out infinite;
+    }
+    .sticker-1 { top: 12%; left: -6%; transform: rotate(-4deg); }
+    .sticker-2 { top: 46%; right: -8%; animation-delay: -2s; }
+    .sticker-3 { bottom: 10%; left: 0; animation-delay: -4s; }
+    @keyframes float {
+      0%, 100% { translate: 0 0; }
+      50% { translate: 0 -10px; }
+    }
+
+    /* ---------- 關於我 ---------- */
+    .about-box {
+      background: var(--sand); border-radius: var(--radius-lg);
+      padding: clamp(36px, 6vw, 80px);
+      display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px;
+    }
+    .about-box .section-title { line-height: 1.35; }
+    .about-text p { color: var(--ink); }
+    .about-quote {
+      margin: 28px 0 0; padding: 22px 28px;
+      background: var(--cream); border-left: 6px solid var(--coral);
+      border-radius: 0 20px 20px 0;
+      font-family: var(--f-zh-title); font-weight: 900; font-size: 19px; line-height: 1.8;
+      color: var(--plum);
+    }
+    .about-quote p { margin: 0; }
+
+    /* ---------- 現在的我 ---------- */
+    .roles-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+    .role-card {
+      position: relative; background: var(--card); border-radius: var(--radius);
+      padding: 40px 36px 34px; overflow: hidden;
+      box-shadow: var(--shadow-sm); border: 1px solid var(--line);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .role-card::before {
+      content: ""; position: absolute; inset: 0 0 auto 0; height: 8px;
+      background: var(--bar, var(--coral));
+    }
+    .role-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+    .role-card:nth-child(1) { --bar: var(--terracotta); }
+    .role-card:nth-child(2) { --bar: var(--coral); }
+    .role-card:nth-child(3) { --bar: var(--amber); }
+    .role-card:nth-child(4) { --bar: var(--peach); }
+    .tag {
+      display: inline-block; padding: 4px 14px; border-radius: 999px;
+      background: rgba(247, 181, 139, .32); color: var(--rust);
+      font-size: 14px; font-weight: 700; line-height: 1.6;
+    }
+    .role-card h3 {
+      font-family: var(--f-zh-title); font-weight: 900; font-size: 28px; margin: 18px 0 4px;
+    }
+    .role-org { color: var(--muted); font-weight: 500; font-size: 15px; margin-bottom: 14px; }
+    .role-card p:last-child { margin: 0; }
+
+    /* ---------- 專業 ---------- */
+    .expertise-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .exp-card {
+      background: var(--card); border-radius: var(--radius); padding: 34px 30px;
+      border: 1px solid var(--line); box-shadow: var(--shadow-sm);
+      display: flex; flex-direction: column;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .exp-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .exp-icon {
+      width: 56px; height: 56px; border-radius: 18px;
+      display: grid; place-items: center;
+      background: linear-gradient(140deg, rgba(247, 181, 139, .45), rgba(242, 169, 59, .3));
+      color: var(--terracotta); margin-bottom: 22px;
+    }
+    .exp-icon svg { width: 28px; height: 28px; }
+    .exp-card h3 { font-family: var(--f-zh-title); font-weight: 900; font-size: 21px; margin-bottom: 10px; }
+    .exp-card p { color: var(--muted); font-size: 16px; flex: 1; }
+    .chips { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+    .chips li {
+      padding: 3px 12px; border-radius: 999px; background: var(--cream);
+      border: 1px solid var(--line); color: var(--rust); font-size: 13px; font-weight: 700;
+    }
+
+    /* ---------- 經歷 ---------- */
+    .journey-grid { display: grid; grid-template-columns: 1.35fr .65fr; gap: 56px; align-items: start; }
+    .timeline { list-style: none; margin: 0; padding: 0 0 0 40px; position: relative; }
+    .timeline::before {
+      content: ""; position: absolute; left: 11px; top: 8px; bottom: 8px; width: 4px; border-radius: 4px;
+      background: linear-gradient(180deg, var(--terracotta), var(--coral) 50%, var(--amber));
+    }
+    .timeline li { position: relative; padding-bottom: 36px; }
+    .timeline li:last-child { padding-bottom: 0; }
+    .timeline li::before {
+      content: ""; position: absolute; left: -38px; top: 6px;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--cream); border: 5px solid var(--coral);
+      box-shadow: 0 0 0 5px var(--cream);
+    }
+    .tl-year {
+      display: inline-block; font-family: var(--f-en); font-weight: 800; font-size: 18px;
+      color: var(--rust); letter-spacing: .02em;
+    }
+    .timeline h3 { font-family: var(--f-zh-title); font-weight: 900; font-size: 22px; margin: 4px 0 6px; }
+    .timeline p { color: var(--muted); margin: 0; }
+
+    .cred-card {
+      position: sticky; top: 104px;
+      background: var(--plum); color: var(--cream);
+      border-radius: var(--radius); padding: 36px 32px;
+      box-shadow: var(--shadow);
+    }
+    .cred-card h3 {
+      font-family: var(--f-zh-title); font-weight: 900; font-size: 24px;
+      color: var(--amber); margin-bottom: 20px;
+    }
+    .cred-card ul { list-style: none; margin: 0; padding: 0; }
+    .cred-card li {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 14px 0; border-top: 1px solid rgba(255, 246, 236, .14);
+      line-height: 1.6;
+    }
+    .cred-card li:first-child { border-top: 0; padding-top: 0; }
+    .cred-card .emo { font-size: 20px; line-height: 1.4; }
+
+    /* ---------- 五大才幹 ---------- */
+    .strengths-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+    .strength {
+      text-align: center; background: var(--card); border-radius: var(--radius);
+      padding: 30px 18px 26px; border: 1px solid var(--line); box-shadow: var(--shadow-sm);
+      transition: transform .3s ease;
+    }
+    .strength:hover { transform: translateY(-4px); }
+    .strength .num {
+      display: block; font-family: var(--f-en); font-weight: 800; font-size: 46px; line-height: 1;
+      color: var(--terracotta); margin-bottom: 12px;
+    }
+    .strength h3 { font-family: var(--f-zh-title); font-weight: 900; font-size: 24px; }
+    .strength .en {
+      display: block; font-family: var(--f-en); font-weight: 800;
+      font-size: 11.5px; letter-spacing: .1em; color: var(--muted); margin: 4px 0 12px;
+    }
+    .strength p { color: var(--muted); font-size: 15px; margin: 0; line-height: 1.7; }
+
+    /* ---------- 下班後 ---------- */
+    .concert {
+      position: relative; overflow: hidden;
+      background: var(--plum); color: var(--cream);
+      border-radius: var(--radius-lg); padding: clamp(40px, 6vw, 84px);
+      display: grid; grid-template-columns: 1.2fr .8fr; gap: 48px; align-items: center;
+    }
+    .concert .eyebrow { color: var(--amber); }
+    .concert .section-title { color: var(--cream); line-height: 1.35; margin-bottom: 26px; }
+    .concert p { color: rgba(255, 246, 236, .88); }
+    .concert-text { position: relative; z-index: 1; }
+    .beam {
+      position: absolute; top: -20%; width: 220px; height: 150%;
+      transform-origin: 50% 0; pointer-events: none;
+      clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%);
+      filter: blur(6px);
+      animation: sway 9s ease-in-out infinite alternate;
+    }
+    .beam-amber { left: 18%; background: linear-gradient(180deg, rgba(242, 169, 59, .38), rgba(242, 169, 59, 0) 85%); --a: -14deg; --b: 10deg; }
+    .beam-coral { right: 12%; background: linear-gradient(180deg, rgba(232, 112, 79, .38), rgba(232, 112, 79, 0) 85%); --a: 12deg; --b: -12deg; animation-duration: 11s; }
+    @keyframes sway {
+      from { transform: rotate(var(--a)); }
+      to { transform: rotate(var(--b)); }
+    }
+    .eq {
+      position: relative; z-index: 1;
+      display: flex; align-items: flex-end; justify-content: center; gap: 10px;
+      height: 240px;
+    }
+    .eq span {
+      width: 16px; height: 100%; border-radius: 10px;
+      background: linear-gradient(0deg, var(--terracotta), var(--coral) 50%, var(--amber));
+      transform-origin: bottom; transform: scaleY(var(--s, .5));
+      animation: bounce var(--d, 1.2s) ease-in-out infinite alternate;
+      animation-delay: var(--delay, 0s);
+    }
+    @keyframes bounce {
+      0% { transform: scaleY(.18); }
+      100% { transform: scaleY(1); }
+    }
+
+    /* ---------- 聯絡我 ---------- */
+    .contact { text-align: center; }
+    .contact .section-lead { margin-bottom: 32px; }
+    .links-grid {
+      list-style: none; padding: 0; margin: 56px auto 0; max-width: 900px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; text-align: left;
+    }
+    .link-card {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 22px 24px; border-radius: 22px; min-height: 84px;
+      background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-sm);
+      color: var(--ink); text-decoration: none;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .link-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--peach); }
+    .link-name { display: block; font-weight: 700; font-size: 18px; line-height: 1.4; }
+    .link-host { display: block; font-size: 13px; color: var(--muted); line-height: 1.5; word-break: break-all; }
+    .link-arrow {
+      flex: none; width: 38px; height: 38px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: var(--sand); color: var(--terracotta); font-weight: 700;
+    }
+
+    /* ---------- 頁尾 ---------- */
+    .site-footer {
+      margin-top: 40px; padding: 36px 0 44px; text-align: center;
+      color: var(--muted); font-size: 15px; border-top: 1px solid var(--line);
+    }
+
+    /* ---------- 捲動淡入 ---------- */
+    .js .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1); }
+    .js .reveal.in { opacity: 1; transform: none; }
+
+    /* ---------- RWD ---------- */
+    @media (max-width: 1040px) {
+      .strengths-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 880px) {
+      .section { padding: 80px 0; }
+      .hero { padding: 48px 0 80px; }
+      .hero-grid,
+      .about-box,
+      .roles-grid,
+      .expertise-grid,
+      .journey-grid,
+      .strengths-grid,
+      .concert,
+      .links-grid { grid-template-columns: 1fr; }
+      .about-box { gap: 24px; }
+      .hero-visual { margin-top: 8px; }
+      .cred-card { position: static; }
+      .strength { display: grid; grid-template-columns: 72px 1fr; gap: 4px 16px; text-align: left; align-items: center; }
+      .strength .num { grid-row: span 3; margin: 0; }
+      .strength .en { margin: 0 0 4px; }
+      .eq { height: 160px; }
+    }
+    @media (max-width: 720px) {
+      .nav-list li:not(.nav-cta) { display: none; }
+    }
+    @media (max-width: 560px) {
+      .container { padding: 0 16px; }
+      .stats { grid-template-columns: 1fr 1fr; gap: 18px 24px; }
+      .stats li:last-child { grid-column: 1 / -1; }
+      .stats strong { font-size: 34px; }
+      .hero-zh { letter-spacing: .4em; }
+      .role-card { padding: 34px 24px 28px; }
+      .exp-card { padding: 28px 22px; }
+      .cred-card { padding: 30px 24px; }
+      .sticker { font-size: 13px; padding: 8px 12px; }
+      .sticker-1 { left: 0; }
+      .sticker-2 { right: 0; }
+      .about-quote { padding: 18px 20px; font-size: 17px; }
+      .eq { gap: 6px; }
+      .eq span { width: 12px; }
+      .btn { width: 100%; }
+    }
+
+    /* ---------- 減少動態 ---------- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+      .js .reveal { opacity: 1; transform: none; }
+      .role-card:hover, .exp-card:hover, .strength:hover, .link-card:hover, .btn-primary:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要內容</a>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="#top" aria-label="Yvette，回到頁首">Yvette<span class="dot">.</span></a>
+      <nav aria-label="主要導覽">
+        <ul class="nav-list">
+          <li><a href="#about">關於我</a></li>
+          <li><a href="#roles">現在的我</a></li>
+          <li><a href="#expertise">專業</a></li>
+          <li><a href="#journey">經歷</a></li>
+          <li><a href="#concert">下班後</a></li>
+          <li class="nav-cta"><a href="#contact">聯絡我</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+
+    <!-- 1. Hero -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="glow glow-peach" aria-hidden="true"></div>
+      <div class="glow glow-amber" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-text reveal">
+          <span class="pill">Hello，我是亦中</span>
+          <h1 id="hero-title">
+            <span class="hero-name" lang="en">Yvette<span class="dot">.</span></span>
+            <span class="hero-zh">劉亦中</span>
+          </h1>
+          <p class="hero-role">無障礙永續顧問</p>
+          <p class="hero-intro">在無障礙交通與旅遊的第一線走了十二年，現在我把這些經驗帶進企業，陪大家把「讓每個人都能出門、都能參與」做成看得見的永續行動。</p>
+          <ul class="stats">
+            <li><strong>12+</strong><span>年無障礙實務</span></li>
+            <li><strong>13</strong><span>本永續報告書（2025）</span></li>
+            <li><strong>4</strong><span>個角色，同一個初心</span></li>
+          </ul>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">一起聊聊 <span aria-hidden="true">→</span></a>
+            <a class="btn btn-outline" href="#about">認識我</a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="arch" role="img" aria-label="劉亦中的頭像（暫時以插畫代替）">
+            <span class="arch-letter" aria-hidden="true">Y</span>
+          </div>
+          <span class="sticker sticker-1" aria-hidden="true">♿ 無障礙交通</span>
+          <span class="sticker sticker-2" aria-hidden="true">🌱 ESG × B Corp</span>
+          <span class="sticker sticker-3" aria-hidden="true">🎤 演唱會狂熱</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 關於我 -->
+    <section id="about" class="section" aria-labelledby="about-title">
+      <div class="container">
+        <div class="about-box reveal">
+          <div>
+            <p class="eyebrow" lang="en">About me</p>
+            <h2 class="section-title" id="about-title">從第一線<br>走到策略桌</h2>
+          </div>
+          <div class="about-text">
+            <p>2014 年我加入多扶，從最基層做起，一路陪著輪椅族、長輩和他們的家人出門、旅行、回家。十二年下來，我做到副總經理，也看過太多「差一點就能出門」的遺憾。</p>
+            <p>後來我發現，要讓改變走得更遠，得讓企業和政府一起動起來。所以我創立了亦可永續，用 ESG、B 型企業和國際標準這些企業聽得懂的語言，把無障礙放進永續策略裡。</p>
+            <p>我的背景其實是園藝。臺大園藝所畢業、也是註冊園藝治療師，這讓我習慣從「人」出發，先理解需求，再談解法。</p>
+            <blockquote class="about-quote">
+              <p>無障礙就像樓梯旁那道斜坡。平常沒注意，需要的時候才知道它有多重要，而且推嬰兒車、拉行李的你我，其實都用得到！</p>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 現在的我 -->
+    <section id="roles" class="section" aria-labelledby="roles-title" style="padding-top: 0;">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow" lang="en">What I do now</p>
+          <h2 class="section-title" id="roles-title">現在的我，身兼四個角色</h2>
+          <p class="section-lead">不同的位置，做的是同一件事：讓社會對多元需求更友善。</p>
+        </div>
+        <div class="roles-grid">
+          <article class="role-card reveal">
+            <span class="tag">無障礙交通・旅遊</span>
+            <h3>副總經理</h3>
+            <p class="role-org">多扶事業股份有限公司／多扶旅行社股份有限公司</p>
+            <p>帶領無障礙接送與無障礙旅遊服務，並以跨事業體的策略角色推動新專案與合作。</p>
+          </article>
+          <article class="role-card reveal">
+            <span class="tag">倡議・公益</span>
+            <h3>秘書長</h3>
+            <p class="role-org">社團法人多扶無障礙生活與交通發展協會</p>
+            <p>推動 CRPD（身心障礙者權利公約）倡議、企業教育訓練與公共溝通，讓更多人理解無障礙。</p>
+          </article>
+          <article class="role-card reveal">
+            <span class="tag">ESG 顧問</span>
+            <h3>創辦人</h3>
+            <p class="role-org">亦可永續 YiKe Sustainability</p>
+            <p>協助企業撰寫永續報告書、申請 B 型企業，並把社會面（S）做得具體、可衡量。</p>
+          </article>
+          <article class="role-card reveal">
+            <span class="tag">永續人才</span>
+            <h3>理事</h3>
+            <p class="role-org">永續專業人才協會</p>
+            <p>參與第一屆理事會，和夥伴一起培育台灣的永續專業人才。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 專業 -->
+    <section id="expertise" class="section" aria-labelledby="expertise-title" style="padding-top: 0;">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow" lang="en">Expertise</p>
+          <h2 class="section-title" id="expertise-title">我能幫上忙的地方</h2>
+        </div>
+        <div class="expertise-grid">
+          <article class="exp-card reveal">
+            <div class="exp-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20l-5.5-2.5V4L9 6.5m0 13.5l6-2.5m-6 2.5V6.5m6 11l5.5 2.5V6.5L15 4m0 13.5V4M9 6.5L15 4"/></svg>
+            </div>
+            <h3>無障礙交通與旅遊</h3>
+            <p>從接送、行程到景點與旅宿，規劃人人都能參與的移動與旅行。</p>
+            <ul class="chips"><li>無障礙旅遊</li><li>交通服務</li></ul>
+          </article>
+          <article class="exp-card reveal">
+            <div class="exp-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.4-7 10-4-1.6-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+            </div>
+            <h3>國際無障礙標準</h3>
+            <p>用國際標準檢視旅宿、餐飲、交通與觀光場域，找出可改善的細節。</p>
+            <ul class="chips"><li>ISO 21902</li><li>ISO 21542</li></ul>
+          </article>
+          <article class="exp-card reveal">
+            <div class="exp-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><path d="M10.5 17c0-3 1.8-5 5-5 0 3.2-2 5-5 5z"/><path d="M10.5 17l2.5-2.5"/></svg>
+            </div>
+            <h3>永續報告與 B 型企業</h3>
+            <p>報告書撰寫、B 型企業評估與申請陪跑，讓永續資訊說得清楚。</p>
+            <ul class="chips"><li>GRI</li><li>B Corp</li></ul>
+          </article>
+          <article class="exp-card reveal">
+            <div class="exp-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M6 17v-5M11 17V8M16 17v-3"/><path d="M5 8l5-4 4 3 5-4"/></svg>
+            </div>
+            <h3>社會影響力評估</h3>
+            <p>把社會價值換算成看得懂的數字，讓好事也能被衡量。</p>
+            <ul class="chips"><li>SROI</li><li>ESG 社會面</li></ul>
+          </article>
+          <article class="exp-card reveal">
+            <div class="exp-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-10.2A4.2 4.2 0 0112 7.3a4.2 4.2 0 017.5 2.5C19.5 15.4 12 20 12 20z"/><path d="M8.5 12h7M12 8.5v7"/></svg>
+            </div>
+            <h3>CRPD 權利倡議</h3>
+            <p>以身心障礙者權利公約為基礎，協助組織建立友善與平權的觀念。</p>
+            <ul class="chips"><li>CRPD</li><li>平權</li></ul>
+          </article>
+          <article class="exp-card reveal">
+            <div class="exp-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0013 0M12 17.5V21M8.5 21h7"/></svg>
+            </div>
+            <h3>友善服務培訓與講座</h3>
+            <p>為企業、金融業、旅宿業與董監事設計體驗式課程，服務更有溫度。</p>
+            <ul class="chips"><li>企業內訓</li><li>董監事進修</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. 經歷 -->
+    <section id="journey" class="section" aria-labelledby="journey-title" style="padding-top: 0;">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow" lang="en">My journey</p>
+          <h2 class="section-title" id="journey-title">一路走來</h2>
+        </div>
+        <div class="journey-grid">
+          <ol class="timeline">
+            <li class="reveal">
+              <span class="tl-year">2014</span>
+              <h3>加入多扶</h3>
+              <p>從基層做起，投入無障礙接送與旅遊服務。</p>
+            </li>
+            <li class="reveal">
+              <span class="tl-year">2017–2023</span>
+              <h3>新竹市無障礙微旅行</h3>
+              <p>以多扶假期執行，連續多年帶大家用無障礙的方式認識新竹。</p>
+            </li>
+            <li class="reveal">
+              <span class="tl-year">2019 起</span>
+              <h3>耕莘護專授課</h3>
+              <p>教授「高齡園藝輔助治療」約三年，把園藝治療帶進照護教育。</p>
+            </li>
+            <li class="reveal">
+              <span class="tl-year">2025</span>
+              <h3>亦可永續：13 本永續報告書</h3>
+              <p>協助企業撰寫永續報告書，並陪伴企業走完 B 型企業申請流程。</p>
+            </li>
+            <li class="reveal">
+              <span class="tl-year">2026</span>
+              <h3>城市無障礙專案</h3>
+              <p>參與新竹市無障礙公車、基隆市有愛店家等計畫，讓友善走進城市日常。</p>
+            </li>
+          </ol>
+
+          <aside class="cred-card reveal" aria-labelledby="cred-title">
+            <h3 id="cred-title">學歷與證照</h3>
+            <ul>
+              <li><span class="emo" aria-hidden="true">🎓</span><span>國立臺灣大學 園藝學系碩士</span></li>
+              <li><span class="emo" aria-hidden="true">🌿</span><span>註冊園藝治療師（HTR）</span></li>
+              <li><span class="emo" aria-hidden="true">🏅</span><span>B 型企業管理師</span></li>
+              <li><span class="emo" aria-hidden="true">🤝</span><span>永續專業人才協會 理事</span></li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. 五大才幹 -->
+    <section id="strengths" class="section" aria-labelledby="strengths-title" style="padding-top: 0;">
+      <div class="container">
+        <div class="section-head center reveal">
+          <p class="eyebrow" lang="en">CliftonStrengths</p>
+          <h2 class="section-title" id="strengths-title">我的五大才幹</h2>
+          <p class="section-lead">我最擅長的是建立關係。和我合作，你會感覺到我先聽懂你，再一起想辦法。</p>
+        </div>
+        <ol class="strengths-grid">
+          <li class="strength reveal">
+            <span class="num" aria-hidden="true">01</span>
+            <h3>連結</h3>
+            <span class="en" lang="en">CONNECTEDNESS</span>
+            <p>相信人與事之間都有關聯</p>
+          </li>
+          <li class="strength reveal">
+            <span class="num" aria-hidden="true">02</span>
+            <h3>體諒</h3>
+            <span class="en" lang="en">EMPATHY</span>
+            <p>能站在對方的位置感受</p>
+          </li>
+          <li class="strength reveal">
+            <span class="num" aria-hidden="true">03</span>
+            <h3>伯樂</h3>
+            <span class="en" lang="en">DEVELOPER</span>
+            <p>喜歡看見並培養別人的潛力</p>
+          </li>
+          <li class="strength reveal">
+            <span class="num" aria-hidden="true">04</span>
+            <h3>搜集</h3>
+            <span class="en" lang="en">INPUT</span>
+            <p>熱愛收集資訊與知識</p>
+          </li>
+          <li class="strength reveal">
+            <span class="num" aria-hidden="true">05</span>
+            <h3>思維</h3>
+            <span class="en" lang="en">INTELLECTION</span>
+            <p>享受深度思考與討論</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 7. 下班後 -->
+    <section id="concert" class="section" aria-labelledby="concert-title" style="padding-top: 0;">
+      <div class="container">
+        <div class="concert reveal">
+          <div class="beam beam-amber" aria-hidden="true"></div>
+          <div class="beam beam-coral" aria-hidden="true"></div>
+          <div class="concert-text">
+            <p class="eyebrow" lang="en">Off duty</p>
+            <h2 class="section-title" id="concert-title">下班後的我，<br>在演唱會現場</h2>
+            <p>燈光暗下、前奏響起的那一秒，是我最喜歡的時刻。和上萬人一起大合唱，那股能量總能讓我充飽電再出發。</p>
+            <p>也因為常跑演唱會，我總會多看一眼：輪椅席在哪裡？動線順不順？每個人都能安心入場、看到舞台、享受同一場感動嗎？這大概就是職業病吧！</p>
+          </div>
+          <div class="eq" aria-hidden="true">
+            <span style="--d:.9s;--delay:-.2s"></span>
+            <span style="--d:1.3s;--delay:-.7s"></span>
+            <span style="--d:1.1s;--delay:-.4s"></span>
+            <span style="--d:.8s;--delay:-.9s"></span>
+            <span style="--d:1.4s;--delay:-.1s"></span>
+            <span style="--d:1s;--delay:-.6s"></span>
+            <span style="--d:1.2s;--delay:-1s"></span>
+            <span style="--d:.85s;--delay:-.3s"></span>
+            <span style="--d:1.35s;--delay:-.8s"></span>
+            <span style="--d:.95s;--delay:-.5s"></span>
+            <span style="--d:1.15s;--delay:-.15s"></span>
+            <span style="--d:1.25s;--delay:-.65s"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. 聯絡我 -->
+    <section id="contact" class="section contact" aria-labelledby="contact-title" style="padding-top: 0;">
+      <div class="container">
+        <div class="section-head center reveal" style="margin-bottom: 0;">
+          <p class="eyebrow" lang="en">Let's talk</p>
+          <h2 class="section-title" id="contact-title">一起打造更友善的世界！</h2>
+          <p class="section-lead">想談無障礙、ESG、B 型企業、企業培訓，或只是想交換演唱會心得，都歡迎來找我聊聊。</p>
+          <a class="btn btn-primary" href="mailto:yichung@dfbda.org">寫信給我 <span aria-hidden="true">✉</span></a>
+        </div>
+        <ul class="links-grid reveal">
+          <li><a class="link-card" href="https://www.linkedin.com/in/ycl325/" target="_blank" rel="noopener"><span><span class="link-name">LinkedIn</span><span class="link-host">linkedin.com/in/ycl325</span></span><span class="visually-hidden">（另開新分頁）</span><span class="link-arrow" aria-hidden="true">↗</span></a></li>
+          <li><a class="link-card" href="https://www.facebook.com/yz.liu.716/" target="_blank" rel="noopener"><span><span class="link-name">Facebook</span><span class="link-host">facebook.com/yz.liu.716</span></span><span class="visually-hidden">（另開新分頁）</span><span class="link-arrow" aria-hidden="true">↗</span></a></li>
+          <li><a class="link-card" href="https://ecovision.tw/" target="_blank" rel="noopener"><span><span class="link-name">亦可永續</span><span class="link-host">ecovision.tw</span></span><span class="visually-hidden">（另開新分頁）</span><span class="link-arrow" aria-hidden="true">↗</span></a></li>
+          <li><a class="link-card" href="https://www.duofu.com.tw/" target="_blank" rel="noopener"><span><span class="link-name">多扶接送</span><span class="link-host">duofu.com.tw</span></span><span class="visually-hidden">（另開新分頁）</span><span class="link-arrow" aria-hidden="true">↗</span></a></li>
+          <li><a class="link-card" href="https://www.dfholidays.com/tw/" target="_blank" rel="noopener"><span><span class="link-name">多扶假期</span><span class="link-host">dfholidays.com</span></span><span class="visually-hidden">（另開新分頁）</span><span class="link-arrow" aria-hidden="true">↗</span></a></li>
+          <li><a class="link-card" href="https://www.dfbda.org/" target="_blank" rel="noopener"><span><span class="link-name">多扶協會</span><span class="link-host">dfbda.org</span></span><span class="visually-hidden">（另開新分頁）</span><span class="link-arrow" aria-hidden="true">↗</span></a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p style="margin:0">© 2026 劉亦中 Yvette · 無障礙永續顧問</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var items = document.querySelectorAll('.reveal');
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) {
+        items.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      items.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+</body>
+</html>
