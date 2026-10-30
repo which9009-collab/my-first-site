@@ -428,6 +428,16 @@
     .gb-entry time { font-size: 13px; color: var(--muted); }
     .gb-entry p { margin: 0; overflow-wrap: anywhere; }
     .gb-empty { color: var(--muted); }
+    .gb-summary { margin-bottom: 18px; }
+    .gb-summary .btn { font-family: inherit; cursor: pointer; }
+    .gb-summary .btn:disabled { opacity: .6; cursor: progress; }
+    .gb-summary .gb-status { margin-top: 10px; min-height: 0; }
+    .gb-summary-box {
+      margin-top: 14px; padding: 18px 22px; border-radius: 22px;
+      background: var(--sand); border-left: 6px solid var(--amber);
+    }
+    .gb-summary-text { margin: 0; font-family: var(--f-zh-title); font-weight: 900; font-size: 18px; color: var(--plum); line-height: 1.7; }
+    .gb-summary-note { margin: 8px 0 0; font-size: 13px; color: var(--muted); }
     .gb-notice {
       background: var(--sand); border-radius: var(--radius); padding: 28px 32px; font-weight: 500;
     }
@@ -851,6 +861,16 @@
 
           <div class="gb-board reveal">
             <h3 id="gb-list-title">大家的留言</h3>
+            <div class="gb-summary">
+              <button class="btn btn-outline" type="button" id="gb-summary-btn">
+                <span aria-hidden="true">✨</span> AI 一句話總結
+              </button>
+              <div class="gb-summary-box" id="gb-summary-box" hidden>
+                <p class="gb-summary-text" id="gb-summary-text"></p>
+                <p class="gb-summary-note">由 Claude AI 根據最新留言自動產生，僅供參考。</p>
+              </div>
+              <p class="gb-status" id="gb-summary-status" role="status" aria-live="polite"></p>
+            </div>
             <p class="gb-empty" id="gb-empty">留言載入中…</p>
             <ol class="gb-list" id="gb-list" aria-labelledby="gb-list-title" tabindex="0"></ol>
           </div>
@@ -1035,6 +1055,8 @@
             form.reset();
             updateCounter();
             setStatus('謝謝你的留言！', 'ok');
+            // 有新留言，舊的總結就過時了
+            summaryBox.hidden = true;
           })
           .catch(function (err) {
             var input = err.field === 'name' ? nameInput : err.field === 'message' ? messageInput : null;
@@ -1045,6 +1067,42 @@
           .finally(function () {
             submitBtn.disabled = false;
             submitBtn.textContent = '送出留言';
+          });
+      });
+
+      // ---------- AI 一句話總結 ----------
+      var summaryBtn = document.getElementById('gb-summary-btn');
+      var summaryBox = document.getElementById('gb-summary-box');
+      var summaryText = document.getElementById('gb-summary-text');
+      var summaryStatus = document.getElementById('gb-summary-status');
+
+      function setSummaryStatus(text, kind) {
+        summaryStatus.textContent = text;
+        summaryStatus.className = 'gb-status' + (kind === 'sr' ? ' visually-hidden' : kind ? ' is-' + kind : '');
+      }
+
+      summaryBtn.addEventListener('click', function () {
+        summaryBtn.disabled = true;
+        setSummaryStatus('AI 正在讀留言，請稍候…');
+
+        fetch('/api/summary', { method: 'POST', headers: { Accept: 'application/json' } })
+          .then(function (res) {
+            return res.json().catch(function () { return {}; }).then(function (data) {
+              if (!res.ok) throw new Error(data.error || 'AI 總結暫時無法使用，請稍後再試。');
+              return data;
+            });
+          })
+          .then(function (data) {
+            summaryText.textContent = data.summary;
+            summaryBox.hidden = false;
+            // 畫面上已經有總結框，這段只念給螢幕閱讀器聽
+            setSummaryStatus('AI 總結：' + data.summary, 'sr');
+          })
+          .catch(function (err) {
+            setSummaryStatus(err instanceof TypeError ? '連線失敗，請檢查網路後再試一次。' : err.message, 'error');
+          })
+          .finally(function () {
+            summaryBtn.disabled = false;
           });
       });
 
